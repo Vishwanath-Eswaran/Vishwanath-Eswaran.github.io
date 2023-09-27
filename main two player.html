@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins');
+        .t{
+            height: 100px;
+            width: 100px;
+            border: 10px solid black;
+            text-align: center;
+            color: black;
+            font-size: 26.5px;
+               }
+        .btnn{
+            height: 100px;
+            width: 100px;
+            border: 10px solid black;
+        }
+        .main{
+            background-color: white;
+            width: 425px;
+            height: 450px;
+            margin-left: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+            border-radius: 20%;
+
+        }
+        table{
+            padding-top: 40px;
+            margin: 0 auto;
+        }
+        body {
+            display: flex;
+            min-height: 100vh;
+            background: linear-gradient(45deg,#f542ec,#AC34E7,#4671EA,#42eff5,#23d5ab,#42f56c,#daf542,#daf542,#f55442);
+            font-family: "Poppins",sans-serif;
+            background-size: 200% 200%;
+            animation: color 10s ease-in-out infinite;
+            text-align: center;
+            }
+        @keyframes color{
+            0%{
+                background-position: 0 50%;
+            }
+            
+            50%{
+                background-position: 0 50%;
+            }25%{
+                background-position: 100% 50%;
+            }
+            75%{
+                background-position: 100% 50%;
+            }
+            100%{
+                background-position: 0 50%;
+            }
+        }
+
+        h1{
+            font-size: 50px;
+            margin: 0px;
+        }
+        .h{
+            background-color: white;
+            height: 375px;
+            width: 350px;
+            text-align: center;
+            border-radius: 20%;
+            margin: 30px;
+        }
+        #result{
+            height: 25px;
+            width: auto;
+            margin-top: 469px;
+            background-color: white;
+            text-align: center;
+            color: black;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 30px;
+            margin-left: 360px;
+            border-radius: 20%;
+        }
+        .b{
+            height: 40px;
+            width: 100px;
+            border : 2px solid black;
+        }
+        #tb{
+            padding-top: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="h">
+        <h1>Tic tac toe</h1>
+        <table>
+            <tr>
+                <td>player 1:</td>
+                <td id="player_1"></td>
+            </tr>
+            <tr>
+                <td>player 2:</td>
+                <td id="player_2"></td>
+            </tr>
+        </table>
+        <table id="tb">
+            <h3>Score:</h3>
+            <tr>
+                <th class="b">player 1</th>
+                <th class="b"> player 2</th>
+            </tr>
+            <tr>
+                <td class="b" id="x">0</td>
+                <td class="b" id="o">0</td>
+            </tr>
+        </table>
+        <button onclick="totalreset()">Reset Game</button>
+    </div>
+    
+    <div class="main">
+        <table>
+            <tr>
+                <td id="1,1" onclick="game_play('1,1')" class="t">
+
+                </td>
+                <td id="1,2" onclick="game_play('1,2')"class="t">
+                </td>
+                <td id="1,3" onclick="game_play('1,3')"class="t">
+
+                </td>
+            </tr>
+            <tr>
+                <td id="2,1" onclick="game_play('2,1')"class="t">
+
+                </td>
+                <td id="2,2" onclick="game_play('2,2')"class="t">
+                </td>
+                <td id="2,3" onclick="game_play('2,3')"class="t">
+                </td>
+            </tr>
+            <tr>
+                <td id="3,1" onclick="game_play('3,1')"class="t">
+                </td>
+                <td id="3,2" onclick="game_play('3,2')"class="t">
+                </td>
+                <td id="3,3" onclick="game_play('3,3')"class="t">
+                </td>
+            </tr>
+        </table>
+        <button onclick="reset()">Reset</button>
+    </div>
+    <div id="result">
+
+    </div>
+    <script>
+        const ans=["X","O"]
+        var z=0
+        var a,b,c,d,e,f,g,h,i,res,winner,aaa,x,o,xp,op,q
+
+        a=document.getElementById("1,1")
+        b=document.getElementById("1,2")
+        c=document.getElementById("1,3")
+        d=document.getElementById("2,1")
+        e=document.getElementById("2,2")
+        f=document.getElementById("2,3")
+        g=document.getElementById("3,1")
+        h=document.getElementById("3,2")
+        i=document.getElementById("3,3")
+        res=document.getElementById("result")
+        winner=""
+        xp=0
+        op=0
+        q=0
+        x=document.getElementById("x")
+        o=document.getElementById("o")
+        p1=document.getElementById("player_1")
+        p2=document.getElementById("player_2")
+        p1.innerHTML=ans[q%2]
+        p2.innerHTML=ans[(q+1)%2]
+        function reset(){
+        a.innerHTML=""
+        b.innerHTML=""
+        c.innerHTML=""
+        d.innerHTML=""
+        e.innerHTML=""
+        f.innerHTML=""
+        g.innerHTML=""
+        h.innerHTML=""
+        i.innerHTML=""
+        res.innerHTML=""
+        res.style.display="none"
+        z=0
+        winner=""
+        }
+        reset()
+        function checking(play){
+            if ((a.innerHTML==b.innerHTML)&&(a.innerHTML==c.innerHTML)&&(b.innerHTML==c.innerHTML)&&(a.innerHTML!="")&&(b.innerHTML!="")&&(c.innerHTML!="")){
+                res.style.display=""
+                res.innerHTML=`${play} won `
+                console.log(`${a.innerHTML},${b.innerHTML},${c.innerHTML}c1`)
+                winner=play
+                q=q+1
+            }
+            if ((d.innerHTML==e.innerHTML)&&(d.innerHTML==f.innerHTML)&&(e.innerHTML==f.innerHTML)&&(d.innerHTML!="")&&(e.innerHTML!="")&&(f.innerHTML!="")){
+                res.style.display=""
+                res.innerHTML=`${play} won `
+                console.log(`${d.innerHTML},${e.innerHTML},${f.innerHTML}c2`)
+                winner=play
+                q=q+1
+            }
+            if ((g.innerHTML==h.innerHTML)&&(g.innerHTML==i.innerHTML)&&(h.innerHTML==i.innerHTML)&&(i.innerHTML!="")&&(h.innerHTML!="")&&(g.innerHTML!="")){
+                res.style.display=""
+                res.innerHTML=`${play} won `
+                console.log(`${g.innerHTML},${h.innerHTML},${i.innerHTML}c3`)
+                winner=play
+                q=q+1
+            }
+            if ((a.innerHTML==e.innerHTML)&&(a.innerHTML==i.innerHTML)&&(e.innerHTML==i.innerHTML)&&(i.innerHTML!="")&&(a.innerHTML!="")&&(e.innerHTML!="")){
+                res.style.display=""
+                res.innerHTML=`${play} won `
+                console.log(`${a.innerHTML},${e.innerHTML},${i.innerHTML}c4`)
+                winner=play
+                q=q+1
+            }
+            if ((c.innerHTML==e.innerHTML)&&(g.innerHTML==c.innerHTML)&&(e.innerHTML==g.innerHTML)&&(g.innerHTML!="")&&(e.innerHTML!="")&&(c.innerHTML!="")){
+                res.style.display=""
+                res.innerHTML=`${play} won `
+                console.log(`${c.innerHTML},${e.innerHTML},${g.innerHTML}c5`)
+                winner=play
+                q=q+1
+            }
+            if ((a.innerHTML==d.innerHTML)&&(a.innerHTML==g.innerHTML)&&(d.innerHTML==g.innerHTML)&&(g.innerHTML!="")&&(a.innerHTML!="")&&(d.innerHTML!="")){
+                res.style.display=""
+                res.innerHTML=`${play} won `
+                console.log(`${a.innerHTML},${d.innerHTML},${g.innerHTML}c6`)
+                winner=play
+                q=q+1
+            }
+            if ((b.innerHTML==e.innerHTML)&&(b.innerHTML==h.innerHTML)&&(e.innerHTML==h.innerHTML)&&(h.innerHTML!="")&&(b.innerHTML!="")&&(e.innerHTML!="")){
+                res.style.display=""
+                res.innerHTML=`${play} won `
+                console.log(`${b.innerHTML}&${e.innerHTML}&${h.innerHTML}c7`)
+                winner=play
+                q=q+1
+            }
+            if ((c.innerHTML==f.innerHTML)&&(i.innerHTML==c.innerHTML)&&(f.innerHTML==i.innerHTML)&&(i.innerHTML!="")&&(f.innerHTML!="")&&(c.innerHTML!="")){
+                res.style.display=""
+                res.innerHTML=`${play} won`
+                console.log(`${c.innerHTML},${f.innerHTML},${i.innerHTML}c8` )
+                winner=play
+                q=q+1
+            }
+            if((a.innerHTML!="")&&(b.innerHTML!="")&&(c.innerHTML!="")&&(d.innerHTML!="")&&(e.innerHTML!="")&&(f.innerHTML!="")&&(g.innerHTML!="")&&(h.innerHTML!="")&&(i.innerHTML!="")&&(winner=="")){
+                res.style.display=""
+                res.innerHTML="Draw"
+                q=q+1
+        }
+        if(winner=="X"){
+            xp=xp+1
+            x.innerHTML=xp
+        }
+        if(winner=="O"){
+            op=op+1
+            o.innerHTML=op
+        }
+        p1.innerHTML=ans[q%2]
+        p2.innerHTML=ans[(q+1)%2]
+        }
+    function xoro(cell){
+            aaa=ans[z%2]
+            if ((document.getElementById(cell).innerHTML!="X")&&(document.getElementById(cell).innerHTML!="O")&&(winner=="")){
+            document.getElementById(cell).innerHTML=aaa
+            document.getElementById(cell).innerText=aaa
+            z=z+1
+            
+            checking(aaa)
+
+        }
+    }   
+    function totalreset(){
+        xp=0
+        op=0
+        reset()
+        x.innerHTML=xp
+        o.innerHTML=op
+    }
+    function oo(l,m,n){
+        if((l==m)&&(m=="X")&&(n=="")){
+            n.innerHTML="x"
+        }
+        else if((l==n)&&(n=="X")&&(m=="")){
+            m.innerHTML="x"
+        }
+        if((n==m)&&(m=="X")&&(l=="")){
+            l.innerHTML="x"
+        }
+    }
+    function oplay(){
+        //defence
+        oo(a,b,c)
+
+    }
+    function game_play(x){
+        xoro(x)
+        xoro(x)
+        oplay()
+
+    }
+    </script>
+</body>
+</html>
