@@ -119,8 +119,8 @@
                 <th class="b"> player 2</th>
             </tr>
             <tr>
-                <td class="b" id="x">0</td>
-                <td class="b" id="o">0</td>
+                <td class="b" id="p1">0</td>
+                <td class="b" id="p2">0</td>
             </tr>
         </table>
         <button onclick="totalreset()">Reset Game</button>
@@ -163,8 +163,9 @@
     </div>
     <script>
         const ans=["X","O"]
+        const player=["p1","p2"]
         var z=0
-        var a,b,c,d,e,f,g,h,i,res,winner,aaa,x,o,xp,op,q
+        var a,b,c,d,e,f,g,h,i,res,winner,aaa,x,o,xp,op,q,xpp,opp
 
         a=document.getElementById("1,1")
         b=document.getElementById("1,2")
@@ -180,8 +181,8 @@
         xp=0
         op=0
         q=0
-        x=document.getElementById("x")
-        o=document.getElementById("o")
+        x=document.getElementById(player[q%2])
+        o=document.getElementById(player[(q+1)%2])
         p1=document.getElementById("player_1")
         p2=document.getElementById("player_2")
         p1.innerHTML=ans[q%2]
