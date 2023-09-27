@@ -102,25 +102,15 @@
 <body>
     <div class="h">
         <h1>Tic tac toe</h1>
-        <table>
-            <tr>
-                <td>player 1:</td>
-                <td id="player_1"></td>
-            </tr>
-            <tr>
-                <td>player 2:</td>
-                <td id="player_2"></td>
-            </tr>
-        </table>
         <table id="tb">
             <h3>Score:</h3>
             <tr>
-                <th class="b">player 1</th>
-                <th class="b"> player 2</th>
+                <th class="b">X</th>
+                <th class="b"> O</th>
             </tr>
             <tr>
-                <td class="b" id="p1">0</td>
-                <td class="b" id="p2">0</td>
+                <td class="b" id="x">0</td>
+                <td class="b" id="o">0</td>
             </tr>
         </table>
         <button onclick="totalreset()">Reset Game</button>
@@ -181,12 +171,9 @@
         xp=0
         op=0
         q=0
-        x=document.getElementById(player[q%2])
-        o=document.getElementById(player[(q+1)%2])
-        p1=document.getElementById("player_1")
-        p2=document.getElementById("player_2")
-        p1.innerHTML=ans[q%2]
-        p2.innerHTML=ans[(q+1)%2]
+        x=document.getElementById("x")
+        o=document.getElementById("o")
+
         function reset(){
         a.innerHTML=""
         b.innerHTML=""
@@ -273,8 +260,6 @@
             op=op+1
             o.innerHTML=op
         }
-        p1.innerHTML=ans[q%2]
-        p2.innerHTML=ans[(q+1)%2]
         }
     function xoro(cell){
             aaa=ans[z%2]
